@@ -4,7 +4,6 @@ import os
 import re
 import argparse
 import pandas as pd
-import numpy as np
 from pandas import DataFrame
 
 
@@ -68,7 +67,8 @@ def clean_data(
     #Cast value column as float
     dataframe_correct_dtypes['value'] = dataframe_correct_dtypes['value'].str.split(' ').str[0]
     #Deal with null values
-    dataframe_correct_dtypes['value'] = dataframe_correct_dtypes['value'].replace({':': -1, ': ': -1})
+    dataframe_correct_dtypes['value'] = dataframe_correct_dtypes['value'].replace({':': -1,
+                                                                                   ': ': -1})
     dataframe_correct_dtypes['value'] = dataframe_correct_dtypes['value'].astype('float')
     dataframe_correct_dtypes = dataframe_correct_dtypes[dataframe_correct_dtypes['value'] != -1]
     #Rename columns
