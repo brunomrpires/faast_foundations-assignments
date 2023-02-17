@@ -27,6 +27,7 @@ def main(
         clean_dataframe = clean_dataframe,
         file_path=output_file_path
     )
+    return clean_dataframe
 
 
 

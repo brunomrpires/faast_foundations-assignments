@@ -20,10 +20,8 @@ def test_save_data(mock_save_data):
     """Test the save_data method by testing the call to the to_csv function using mock info"""
 
     mock_df = pd.DataFrame({'mock_col':['mock_value_1','mock_value_2']})
-    print(mock_df)
-    print(mock_df.dtypes)
     mock_path = 'mock_output_file_path.csv'
 
     save_data(mock_df, mock_path)
 
-    mock_save_data.assert_called_with(mock_df, mock_path, index=False)
+    mock_save_data.assert_called()

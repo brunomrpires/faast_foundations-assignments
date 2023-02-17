@@ -6,7 +6,7 @@ import pandas as pd
 from pandas import DataFrame
 
 
-def load_data(file_path: str):
+def load_data(file_path: str = None):
     """
     This function is responsible for loading the raw data,
     applying the correct split and tranforming it to a pandas dataframe
@@ -36,8 +36,8 @@ def load_data(file_path: str):
 
 
 def save_data(
-    clean_dataframe: DataFrame,
-    file_path: str
+    clean_dataframe: DataFrame = None,
+    file_path: str = None
 ):
     """
     This function saves the final dataframe in the desired path
