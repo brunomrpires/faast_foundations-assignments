@@ -1,18 +1,20 @@
 """Tests for the loading_saving module"""
 from unittest.mock import patch
 import pandas as pd
-
-from life_expectancy.loading_saving import load_data, save_data
+from life_expectancy.data_cleaning import CSVDataCleaner
+from life_expectancy.loading_saving import save_data
+from life_expectancy.env_variables import  CSV_TEST_FILE_PATH
 from . import FIXTURES_DIR
 
 
 def test_load_data(eu_life_expectancy_loaded_dataframe_test):
     """Test the load_data method that loads the raw test dataframe"""
 
-    loaded_test_data = load_data(file_path=FIXTURES_DIR / 'eu_life_expectancy_raw_test.tsv')
+    data_loader = CSVDataCleaner(file_path=CSV_TEST_FILE_PATH)
+    data = data_loader.loader.load_data()
 
     pd.testing.assert_frame_equal(
-        loaded_test_data, eu_life_expectancy_loaded_dataframe_test
+        data, eu_life_expectancy_loaded_dataframe_test
     )
 
 @patch("life_expectancy.loading_saving.pd.DataFrame.to_csv", autospec=True)
@@ -22,6 +24,7 @@ def test_save_data(mock_save_data):
     mock_df = pd.DataFrame({'mock_col':['mock_value_1','mock_value_2']})
     mock_path = 'mock_output_file_path.csv'
 
+    data_loader = CSVDataCleaner(file_path=CSV_TEST_FILE_PATH)
     save_data(mock_df, mock_path)
 
     mock_save_data.assert_called()
