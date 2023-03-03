@@ -1,5 +1,4 @@
 """Module to clean assignment data"""
-import os
 import pandas as pd
 from pandas import DataFrame
 
