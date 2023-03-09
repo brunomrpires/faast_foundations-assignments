@@ -28,7 +28,7 @@ def main(
     raw_dataframe = cleaner.loader.load_data()
     clean_dataframe = cleaner.clean_data(country=country,
                                          data=raw_dataframe)
-    
+
     save_data(
         clean_dataframe = clean_dataframe,
         file_path=output_file_path

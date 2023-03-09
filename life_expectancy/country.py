@@ -1,3 +1,4 @@
+"""Country Enum"""
 from enum import Enum
 
 class Country(str, Enum):

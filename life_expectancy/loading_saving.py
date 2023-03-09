@@ -9,7 +9,7 @@ from life_expectancy.env_variables import JSON_FILE_PATH, CSV_FILE_PATH, SAVE_FI
 
 class DataLoader(ABC):
     """Loads data from specific file extensions"""
-    def __init__(self, 
+    def __init__(self,
                  file_path:str
                  ):
         self.file_path = file_path
@@ -17,10 +17,10 @@ class DataLoader(ABC):
     def load_data(self):
         """Loads the data into a pandas dataframe"""
 
-    def get_file_name(self) -> str:
-        """Gets the file name as str"""
-        return self.file_name
-    
+    def get_file_path(self) -> str:
+        """Gets the file path as str"""
+        return self.file_path
+
 class CSVDataLoader(DataLoader):
     """Loads the data froma .csv file"""
     def __init__(self,
@@ -28,9 +28,9 @@ class CSVDataLoader(DataLoader):
                  ):
         if file_path is None:
             file_path = CSV_FILE_PATH
-        
+
         super().__init__(file_path)
-    
+
     def load_data(self):
         """
         This function is responsible for loading the raw data,
@@ -58,10 +58,10 @@ class CSVDataLoader(DataLoader):
                                                 columns = file_with_split_lines[0])
 
         return eu_life_expectancy_raw_dataframe
-    
+
 class JSONDataLoader(DataLoader):
     """Loads the data from a .json file"""
-    def __init__(self, 
+    def __init__(self,
                  file_path: str = JSON_FILE_PATH
                  ):
         if file_path is None:
@@ -75,7 +75,7 @@ class JSONDataLoader(DataLoader):
             data = json.load(file)
 
         return pd.DataFrame(data)
-    
+
 def save_data(
     clean_dataframe: DataFrame = None,
     file_path: str = SAVE_FILE_PATH_JSON
@@ -88,4 +88,3 @@ def save_data(
 
     clean_dataframe.to_csv(file_path,
                            index = False)
-    

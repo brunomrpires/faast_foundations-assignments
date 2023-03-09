@@ -3,8 +3,9 @@ import pandas as pd
 from pytest import MonkeyPatch
 from life_expectancy.main import main
 from life_expectancy.file_extension import FileExtension
+from life_expectancy.env_variables import SAVE_TEST_FILE_PATH_CSV, SAVE_TEST_FILE_PATH_JSON
+from life_expectancy.env_variables import CSV_TEST_FILE_PATH, JSON_TEST_FILE_PATH
 from . import FIXTURES_DIR
-from life_expectancy.env_variables import SAVE_TEST_FILE_PATH_CSV, SAVE_TEST_FILE_PATH_JSON, CSV_TEST_FILE_PATH, JSON_FILE_PATH, JSON_TEST_FILE_PATH
 
 
 def test_main_csv(monkeypatch: MonkeyPatch, pt_life_expectancy_expected_test_csv):
