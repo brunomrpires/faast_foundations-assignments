@@ -1,25 +1,36 @@
 """Module to clean assignment data"""
 import os
 import argparse
-from .data_cleaning import clean_data
-from .loading_saving import load_data, save_data
+from life_expectancy.data_cleaning import JSONDataCleaner, CSVDataCleaner
+from life_expectancy.loading_saving import save_data
+from life_expectancy.country import Country
+from life_expectancy.file_extension import FileExtension
+from life_expectancy.env_variables import SAVE_FILE_PATH, CSV_FILE_PATH
 
 
 def main(
-    country : str,
-    input_file_path: str,
-    output_file_path: str
+    country : str = Country.PT.value,
+    input_file_path: str = None,
+    output_file_path: str = None,
+    file_extension: FileExtension = FileExtension.JSON
 ):
     """
     This function should load the data, clean it and save it
 
     param: country -> region to filter the data by
     """
-    raw_dataframe = load_data(file_path=input_file_path)
-    clean_dataframe = clean_data(
-        raw_dataframe = raw_dataframe,
-        country = country
-        )
+
+    if file_extension == FileExtension.CSV:
+        cleaner = CSVDataCleaner(input_file_path)
+    elif file_extension == FileExtension.JSON:
+        cleaner = JSONDataCleaner(input_file_path)
+
+    if cleaner.check_country_exists(country):
+        country = Country[country.upper()].value
+
+    raw_dataframe = cleaner.loader.load_data()
+    clean_dataframe = cleaner.clean_data(country=country,
+                                         data=raw_dataframe)
 
     save_data(
         clean_dataframe = clean_dataframe,
@@ -59,6 +70,6 @@ if __name__ == "__main__": # pragma: no cover
 
     main(
         country=args.country,
-        input_file_path=parent_directory + '/data/' + args.input_file_name,
-        output_file_path=parent_directory + '/data/' + args.output_file_name
+        input_file_path=CSV_FILE_PATH,
+        output_file_path=SAVE_FILE_PATH
     )
