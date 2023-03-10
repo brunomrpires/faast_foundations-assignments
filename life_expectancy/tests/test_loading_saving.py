@@ -1,9 +1,9 @@
 """Tests for the loading_saving module"""
 from unittest.mock import patch
 import pandas as pd
-from life_expectancy.data_cleaning import CSVDataCleaner, JSONDataCleaner
+from life_expectancy.data_cleaning import CSVDataCleaner
 from life_expectancy.loading_saving import save_data
-from life_expectancy.env_variables import  CSV_TEST_FILE_PATH, JSON_TEST_FILE_PATH
+from life_expectancy.env_variables import  CSV_TEST_FILE_PATH
 
 
 def test_load_data_csv(eu_life_expectancy_loaded_dataframe_test_csv):
