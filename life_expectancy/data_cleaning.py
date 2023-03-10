@@ -126,7 +126,7 @@ class JSONDataCleaner(DataCleaner):
 
     def clean_data(self,
                    data: pd.DataFrame,
-                   country: Country
+                   country: Country = None
                    ) -> pd.DataFrame:
 
         data = data.rename(columns={'country': 'region', 'life_expectancy': 'value'})

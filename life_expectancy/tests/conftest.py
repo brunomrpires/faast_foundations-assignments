@@ -23,9 +23,15 @@ def pt_life_expectancy_expected() -> pd.DataFrame:
     return pd.read_csv(FIXTURES_DIR / "pt_life_expectancy_expected.csv")
 
 @pytest.fixture(scope="session")
-def eu_life_expectancy_loaded_dataframe_test() -> pd.DataFrame:
+def eu_life_expectancy_loaded_dataframe_test_csv() -> pd.DataFrame:
     """Fixture to load the expected output of the cleaning script"""
     return pd.read_csv(FIXTURES_DIR / "eu_life_expectancy_loaded_dataframe_test.csv")
+
+@pytest.fixture(scope="session")
+def eu_life_expectancy_loaded_dataframe_test_json() -> pd.DataFrame:
+    """Fixture to load the expected output of the cleaning script"""
+    data = pd.read_csv(FIXTURES_DIR / "eurostat_life_expect_loaded_test.csv")
+    return data
 
 @pytest.fixture(scope="session")
 def pt_life_expectancy_expected_test_csv() -> pd.DataFrame:

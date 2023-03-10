@@ -25,6 +25,9 @@ def main(
     elif file_extension == FileExtension.JSON:
         cleaner = JSONDataCleaner(input_file_path)
 
+    if cleaner.check_country_exists(country):
+        country = Country[country.upper()].value
+
     raw_dataframe = cleaner.loader.load_data()
     clean_dataframe = cleaner.clean_data(country=country,
                                          data=raw_dataframe)
